@@ -1,3 +1,5 @@
+from time import sleep
+
 # ------------- Funções ------------
 
 def lin(x = '-', y = 40):
@@ -36,44 +38,54 @@ def analiseFloat(nome = 'str'):
             break
     
 # ------------------ Memu --------------------
-
-cabeçalho("Menu")
-op = ['Exercícios Diarios', 'Cronograma da alimentação', 'IMC',"Registra Meu Peso",'litros diários']
-menu(op)
-escolha = analiseInteiro('Sua escolha: ')
-while escolha < 1 or escolha > 5:
-    print('\033[31mopção inválida\033[m')
+while True:
+    cabeçalho("Menu")
+    op = [ 'IMC','Exercícios Diarios', 'Cronograma da alimentação',"Registra Meu Peso",'litros diários']
+    menu(op)
     escolha = analiseInteiro('Sua escolha: ')
+    while escolha < 1 or escolha > 5:
+        print('\033[31mopção inválida\033[m')
+        escolha = analiseInteiro('Sua escolha: ')
 
-if escolha == 1:
-    print('x1')
-elif escolha == 2:
-    print('x2')
+    # ------------------ IMC ----------------------
+    if escolha == 1:
+        cabeçalho("Veja com está o seu IMC")
+        Altura = analiseFloat('Digite sua altura: ')
+        Peso = analiseFloat('Digite seu peso: ')
+        IMC = Peso / (Altura * Altura)
+        Classificação = ""
+        if IMC < 18.5:
+            Classificação = "Magreza"
+        elif IMC > 18.5 and IMC < 24.9:
+            Classificação = "Normal"
+        elif IMC > 24.9 and IMC < 29.9:
+            Classificação = "acima do peso"
+        elif IMC > 30 and IMC < 39.9:
+            Classificação = "Obsidade"
+        elif IMC > 39.9:
+            Classificação = "Obsidade morbida"
+        print(f'Seu IMC é de {IMC} e sua classificação é {Classificação}')
 
-# ------------------ IMC ---------------------- 
-elif escolha == 3:
-    cabeçalho("Veja com está o seu IMC")
-    Altura = analiseFloat('Digite sua altura: ')
-    Peso = analiseFloat('Digite seu peso: ')
-    IMC = Peso / (Altura * Altura)
-    Classificação = ""
-    if IMC < 18.5:
-        Classificação = "Magreza"
-    elif IMC > 18.5 and IMC < 24.9:
-        Classificação = "Normal"
-    elif IMC > 24.9 and IMC < 29.9:
-        Classificação = "acima do peso"
-    elif IMC > 30 and IMC < 39.9:
-        Classificação = "Obsidade"
-    elif IMC > 39.9:
-        Classificação = "Obsidade morbida"
+    # --------------Exercícios Diarios---------------
+    elif escolha == 2:
+            cabeçalho("Exercícios Diarios")
+            print('Analísando o IMC...')
+            sleep(2)
+            try:
+                print(f"Seu IMC é de {IMC}, Você está {classificação}")
+            except:
+                print("\033[31mIMC não localizado, tente fazer a opção 1!\033[m")
+            else:
+                pass
 
-    print(f'Seu IMC é de {IMC} e sua classificação é {Classificação}')
+    # ------------------ Cronograma da Alimentação -------------
+    elif escolha == 3:
+        print('x3')
+    
+    # ----------------- Registra meu peso ------------------
+    elif escolha == 4:
+        print('x4')
 
-    print(f'{IMC}')
-
-    print('x3')
-elif escolha == 4:
-    print('x4')
-else:
-    print('x5')
+    # ------------------- Litros Diarios ----------------
+    else:
+        print('x5')
