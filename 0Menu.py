@@ -88,4 +88,24 @@ while True:
 
     # ------------------- Litros Diarios ----------------
     else:
-        print('x5')
+        olol = 2500
+        cabeçalho("Litros Diários")
+        print('Quantos ML seu copo principal tem: ')
+        xy = ['100ml','150ml','200ml','250ml','400mm']
+        menu(xy)
+        esc = analiseInteiro("Escolha sua opção: ")
+        while esc < 1 or esc > 5:
+            print('\033[31mopção inválida\033[m')
+            esc = analiseInteiro('Sua escolha: ')
+        if esc == 1:
+            cp = olol // 100
+        elif esc == 2:
+            cp = olol // 150
+        elif esc == 3:
+            cp = olol // 200
+        elif esc == 4:
+            cp = olol // 250
+        else:
+            cp = olol // 400
+        print(f'Você precisa beber {cp} copos por dia')
+
