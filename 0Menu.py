@@ -1,5 +1,5 @@
 from time import sleep
-
+from datetime import date
 # ------------- Funções ------------
 
 def lin(x = '-', y = 40):
@@ -7,7 +7,7 @@ def lin(x = '-', y = 40):
 
 def cabeçalho(x = "nome"):
     lin()
-    print(f'{x:-^40}')
+    print(f'{x.center(40, "-")}')
     lin()
 
 def menu(x = []):
@@ -38,6 +38,16 @@ def analiseFloat(nome = 'str'):
             break
     
 # ------------------ Memu --------------------
+data_de_hoje = date.today()
+arq = "Registro Peso"
+try:
+    b = open(arq, 'rt')
+    b.close()
+except:
+    b = open(arq, 'wt+')
+else:
+    pass
+
 while True:
     cabeçalho("Menu")
     op = [ 'IMC','Exercícios Diarios', 'Cronograma da alimentação',"Registra Meu Peso",'litros diários']
@@ -84,7 +94,10 @@ while True:
     
     # ----------------- Registra meu peso ------------------
     elif escolha == 4:
-        print('x4')
+        pseo = analiseFloat("Quanto você está pesando hoje: ")
+        a = open(arq, 'at')
+        a.write(f"No Dia {data_de_hoje.strftime('%d/%m/%Y')} você estava pesando {pseo}\n")
+        print(f"{pseo} Kilos no dia {data_de_hoje.strftime('%d/%m/%Y')}")
 
     # ------------------- Litros Diarios ----------------
     else:
