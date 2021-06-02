@@ -5,10 +5,12 @@ from datetime import date
 def lin(x = '-', y = 40):
     print(x * y)
 
+
 def cabeçalho(x = "nome"):
     lin()
     print(f'{x.center(40, "-")}')
     lin()
+
 
 def menu(x = []):
     s = 1
@@ -16,6 +18,7 @@ def menu(x = []):
         print(f'Opção {s} = {e}')
         s += 1
     lin()
+
 
 def analiseInteiro(nome = 'str'):
     while True:
@@ -27,6 +30,7 @@ def analiseInteiro(nome = 'str'):
             return n
             break
 
+
 def analiseFloat(nome = 'str'):
     while True:
         try:
@@ -36,17 +40,23 @@ def analiseFloat(nome = 'str'):
         else:
             return n
             break
-    
+
+def criaarquivo(arq):
+    try:
+        b = open(arq, 'rt')
+        b.close
+    except:
+        b = open(arq, 'wt+')
+    else:
+        pass
+
+
 # ------------------ Memu --------------------
 data_de_hoje = date.today()
-arq = "Registro Peso"
-try:
-    b = open(arq, 'rt')
-    b.close()
-except:
-    b = open(arq, 'wt+')
-else:
-    pass
+registra_peso = "Registro Peso"
+regitrs_IMC = "Resgistro IMC"
+criaarquivo(registra_peso)
+criaarquivo(regitrs_IMC)
 
 while True:
     cabeçalho("Menu")
@@ -75,6 +85,8 @@ while True:
         elif IMC > 39.9:
             Classificação = "Obsidade morbida"
         print(f'Seu IMC é de {IMC} e sua classificação é {Classificação}')
+        b = open(regitrs_IMC, 'at')
+        b.write(f"No dia {data_de_hoje} sua classificação era de {Classificação}, e seu IMC estava {IMC}\n")
 
     # --------------Exercícios Diarios---------------
     elif escolha == 2:
@@ -82,7 +94,7 @@ while True:
             print('Analísando o IMC...')
             sleep(2)
             try:
-                print(f"Seu IMC é de {IMC}, Você está {classificação}")
+                print(f"Seu IMC é de {IMC}, Você está {Classificação}")
             except:
                 print("\033[31mIMC não localizado, tente fazer a opção 1!\033[m")
             else:
@@ -95,7 +107,7 @@ while True:
     # ----------------- Registra meu peso ------------------
     elif escolha == 4:
         pseo = analiseFloat("Quanto você está pesando hoje: ")
-        a = open(arq, 'at')
+        a = open(registra_peso, 'at')
         a.write(f"No Dia {data_de_hoje.strftime('%d/%m/%Y')} você estava pesando {pseo}\n")
         print(f"{pseo} Kilos no dia {data_de_hoje.strftime('%d/%m/%Y')}")
 
@@ -121,4 +133,3 @@ while True:
         else:
             cp = olol // 400
         print(f'Você precisa beber {cp} copos por dia')
-
